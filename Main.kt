@@ -1,7 +1,14 @@
 import java.io.File
 
-// PRUEBA DE ENTRADA DE DATOS
-data class Arista(val origen: Int, val destino: Int, val distancia: Int, val consumo: Int)
+// Estructura de datos para las aristas (conexiones entre paradas) con valores Double
+data class Arista(val origen: Int, val destino: Int, val distancia: Double, val consumo: Double)
+
+// Mapa de nombres de las paradas
+val mapaNombres = mapOf(
+    0 to "USB (sede Sartenejas)",
+    1 to "McDonald's Trinidad",
+    2 to "Chacaito"
+)
 
 fun main(args: Array<String>) {
     if (args.isEmpty()) {
@@ -24,28 +31,41 @@ fun main(args: Array<String>) {
     }
 
     try {
-        // Leer la cantidad de nodos y aristas
         val numNodos = lines[0].trim().toInt()
         val numAristas = lines[1].trim().toInt()
-
         val aristas = mutableListOf<Arista>()
 
-        // Leer las aristas
+        // Leer las aristas con valores de tipo Double
         for (i in 2 until 2 + numAristas) {
-            val datos = lines[i].split(" ").map { it.toIntOrNull() }
+            val datos = lines[i].split(" ").map { it.toDoubleOrNull() }
             if (datos.size != 4 || datos.any { it == null }) {
                 println("Advertencia: Línea inválida en el archivo: '${lines[i]}'. Se ignorará.")
                 continue
             }
 
             val (origen, destino, distancia, consumo) = datos.filterNotNull()
-            aristas.add(Arista(origen, destino, distancia, consumo))
+            aristas.add(Arista(origen.toInt(), destino.toInt(), distancia, consumo))
         }
 
-        // Imprimir las aristas
-        println("\nLista de Aristas:")
-        for (arista in aristas) {
-            println("HAY UNA ARISTA DE ${arista.origen} A ${arista.destino} CON DISTANCIA ${arista.distancia} Y CONSUMO ${arista.consumo}")
+        // Agrupar recorridos por rutas
+        val rutas = mutableMapOf<Int, MutableList<Arista>>()
+
+        for ((index, arista) in aristas.withIndex()) {
+            rutas.getOrPut(index) { mutableListOf() }.add(arista)
+        }
+
+        // Imprimir las rutas con recorridos
+        println("\nLista de Rutas:")
+        for ((rutaId, recorridos) in rutas) {
+            println("\nRuta ${rutaId + 1}:")
+            for ((recorridoId, arista) in recorridos.withIndex()) {
+                val nombreOrigen = mapaNombres[arista.origen] ?: "Parada ${arista.origen}"
+                val nombreDestino = mapaNombres[arista.destino] ?: "Parada ${arista.destino}"
+                println(
+                    "  Recorrido $recorridoId: $nombreOrigen - $nombreDestino " +
+                            "(Distancia: %.2f km, Consumo: %.2f L)".format(arista.distancia, arista.consumo)
+                )
+            }
         }
 
     } catch (e: Exception) {
