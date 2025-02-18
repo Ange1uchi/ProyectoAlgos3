@@ -2,19 +2,19 @@
 package mypackage
 
 //LADO
-open class Lado(val a: Int, val b: Int) {
+open class Lado(val v: Int, val u: Int) {
 
     // Retorna cualquiera de los dos vértices del grafo
     fun cualquieraDeLosVertices() : Int {
-        return a
+        return v
     }
 
     // Dado un vertice w, si w == a entonces retorna b, de lo contrario si w == b  entonces retorna a,  y si w no es igual a a ni a b, entonces se lanza una RuntimeExpception
     fun elOtroVertice(w: Int) : Int {
-        if (w == a) {
-            return b
-        } else if (w == b) {
-            return a
+        if (w == v) {
+            return u
+        } else if (w == u) {
+            return v
         } else {
             throw RuntimeException()
         }

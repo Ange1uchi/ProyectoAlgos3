@@ -1,26 +1,16 @@
-// filepath: /home/seijas/Desktop/Laboratorio2/Arco.kt
 package mypackage
 
-// ARCO
-public open class Arco(val inicio: Int, val fin: Int) : Lado(inicio, fin) {
+// Clase Arco que maneja costos
+open class Arco(val inicio: Int, val fin: Int, val costo: Double = 0.0) : Lado(inicio, fin) {
 
-      
-// Retorna el vértice inicial del arco
- fun fuente() : Int {
-     return inicio
- }
+    fun fuente(): Int = inicio
+    fun sumidero(): Int = fin
 
- // Retorna el vértice final del arco
- fun sumidero() : Int {
-     return fin
- }
-
- // Representación del arco
- override fun toString() : String {
-     return """
-     inicio: ${inicio}
-     fin: ${fin}
-     """
-  }
-
+    override fun toString(): String {
+        return """
+        inicio: $inicio
+        fin: $fin
+        Costo: ${"%.2f".format(costo)}
+        """
+    }
 }
