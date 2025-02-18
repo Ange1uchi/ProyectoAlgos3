@@ -8,8 +8,8 @@ MAIN=MainProyect.kt
 OUTPUT=MainProyect.jar
 
 # Nombres de los archivos de entrada
-INPUT1=ruta1.txt
-INPUT2=ruta2.txt
+INPUT1=RutaOptUSB.txt
+# INPUT2=ruta2.txt
 
 # Regla principal
 all: clean lib compile
@@ -29,7 +29,7 @@ compile: lib
 # Ejecutar el programa con dos archivos de entrada
 run:
 	@echo "Ejecutando el programa..."
-	$(JAVA) -cp ".;$(JAR);$(OUTPUT)" mypackage.MainProyectKt $(INPUT1) $(INPUT2)
+	$(JAVA) -cp ".;$(JAR);$(OUTPUT)" mypackage.MainProyectKt $(INPUT1)
 
 # Limpiar archivos generados
 clean:
