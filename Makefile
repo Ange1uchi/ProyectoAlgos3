@@ -16,8 +16,8 @@ all: clean lib compile
 
 # Compilar la librería `libGrafoKt.jar`
 lib:
-	@echo "Compilando la libreria..."
-	if not exist $(BUILD_DIR) mkdir $(BUILD_DIR)
+	@echo "Compilando la librería..."
+	mkdir -p $(BUILD_DIR)
 	$(KOTLINC) $(SRC_DIR)/*.kt -d $(BUILD_DIR)
 	jar -cvf $(JAR) -C $(BUILD_DIR) .
 
@@ -29,11 +29,11 @@ compile: lib
 # Ejecutar el programa con dos archivos de entrada
 run:
 	@echo "Ejecutando el programa..."
-	$(JAVA) -cp ".;$(JAR);$(OUTPUT)" mypackage.MainProyectKt $(INPUT1)
+	$(JAVA) -cp ".:$(JAR):$(OUTPUT)" mypackage.MainProyectKt $(INPUT1)
 
 # Limpiar archivos generados
 clean:
 	@echo "Limpiando archivos generados..."
-	if exist $(OUTPUT) del /F /Q $(OUTPUT)
-	if exist $(JAR) del /F /Q $(JAR)
-	if exist $(BUILD_DIR) rmdir /S /Q $(BUILD_DIR)
+	rm -f $(OUTPUT)
+	rm -f $(JAR)
+	rm -rf $(BUILD_DIR)
