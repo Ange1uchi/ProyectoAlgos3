@@ -21,7 +21,6 @@ class GrafoDirigido(val numVertices: Int) {
                 val mapaNombres = mutableMapOf<String, Int>()
                 var grafoRuta1: GrafoDirigido? = null
                 var grafoRuta2: GrafoDirigido? = null
-                var leyendoRuta = false
                 var rutaActual: GrafoDirigido? = null
     
                 var i = 0

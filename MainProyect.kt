@@ -14,9 +14,7 @@ fun main(args: Array<String>) {
         return
     }
 
-    // ==============================
     //   MATRICES DE ADYACENCIA
-    // ==============================
     // Ruta 1: Imprimir matrices
     println("\n============= Ruta 1 =============")
     println("USB -> LA TRINIDAD")
@@ -32,10 +30,9 @@ fun main(args: Array<String>) {
     imprimirMatriz(grafoRuta2.obtenerMatrizCostos(), "Costos para Ruta 2 (Litros de gasoil)")
     imprimirMatriz(grafoRuta2.obtenerMatrizDistancias(), "Distancias para Ruta 2 (Kilómetros)")
 
-    // ==============================
-    //   ANÁLISIS DE RUTAS
-    // ==============================
 
+
+    //   ANÁLISIS DE RUTAS
     println("\n===================================")
     println("     Comparación de rutas (BFS)      ")
     println("===================================\n")
@@ -51,9 +48,6 @@ fun main(args: Array<String>) {
     comparadorRuta2.encontrarMejorRutaBFS()
 }
 
-/**
- * Función para imprimir una matriz de adyacencia con formato.
- */
 fun imprimirMatriz(matriz: Array<DoubleArray>, titulo: String) {
     println("\n====================================")
     println(" $titulo ")
